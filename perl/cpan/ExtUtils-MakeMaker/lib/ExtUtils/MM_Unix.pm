@@ -945,7 +945,7 @@ $(INST_DYNAMIC): $(OBJECT) $(MYEXTLIB) $(BOOTSTRAP) $(INST_ARCHAUTODIR)$(DFSEP).
     }
 
     my $ld_run_path_shell = "";
-    if ($self->{LD_RUN_PATH} ne "") {
+    if (($self->{LD_RUN_PATH} ne "") && ($self->{USE_MM_LD_RUN_PATH})) {
 	$ld_run_path_shell = 'LD_RUN_PATH="$(LD_RUN_PATH)" ';
     }
 

@@ -88,6 +88,11 @@ libraries.  LD_RUN_PATH is a colon separated list of the directories
 in LDLOADLIBS. It is passed as an environment variable to the process
 that links the shared library.
 
+Fedora extension: This generation of LD_RUN_PATH is disabled by default.
+To use the generated LD_RUN_PATH for all links, set the USE_MM_LD_RUN_PATH
+MakeMaker object attribute / argument, (or set the $USE_MM_LD_RUN_PATH
+environment variable).
+
 =head2 BSLOADLIBS
 
 List of those libraries that are needed but can be linked in
