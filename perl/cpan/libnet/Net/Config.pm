@@ -29,7 +29,7 @@ eval { local $SIG{__DIE__}; require Net::LocalCfg };
   ftp_firewall    => undef,
   ftp_ext_passive => 1,
   ftp_int_passive => 1,
-  test_hosts      => 1,
+  test_hosts      => 0,
   test_exist      => 1,
 );
 
