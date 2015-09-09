@@ -3287,6 +3287,8 @@ EOM
 			;;
 		linux)	osname=linux
 			case "$3" in
+			# MER - fix osvers to 3.0 regardless of version on buildhost
+			3.*)	osvers="3.0" ;;
 			*)	osvers="$3" ;;
 			esac
 			;;
