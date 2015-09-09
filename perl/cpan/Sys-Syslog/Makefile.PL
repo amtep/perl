@@ -121,7 +121,8 @@ elsif ((-S "/dev/log" or -c _) and -w _) {
     $_PATH_LOG = "/dev/log";
 }
 else {
-    $_PATH_LOG = "";
+    # MER - force /dev/log even if buildhost doesn't have it
+    $_PATH_LOG = "/dev/log";
 }
 
 
