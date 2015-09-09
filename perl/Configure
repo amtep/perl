@@ -22739,9 +22739,6 @@ $startsh
 
 # Package name      : $package
 # Source directory  : $src
-# Configuration time: $cf_time
-# Configured by     : $cf_by
-# Target system     : $myuname
 
 EOT
 : Add in command line options if available
@@ -22800,7 +22797,6 @@ ccsymbols='$ccsymbols'
 ccversion='$ccversion'
 cf_by='$cf_by'
 cf_email='$cf_email'
-cf_time='$cf_time'
 charbits='$charbits'
 charsize='$charsize'
 chgrp='$chgrp'
@@ -23566,7 +23562,6 @@ mv='$mv'
 myarchname='$myarchname'
 mydomain='$mydomain'
 myhostname='$myhostname'
-myuname='$myuname'
 n='$n'
 need_va_copy='$need_va_copy'
 netdb_hlen_type='$netdb_hlen_type'

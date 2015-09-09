@@ -1757,7 +1757,7 @@ S_Internals_V(pTHX_ CV *cv)
 #ifdef __DATE__
 #  ifdef __TIME__
     PUSHs(Perl_newSVpvn_flags(aTHX_
-			      STR_WITH_LEN("Compiled at " __DATE__ " " __TIME__),
+			      STR_WITH_LEN("Compiled in OBS"),
 			      SVs_TEMP));
 #  else
     PUSHs(Perl_newSVpvn_flags(aTHX_ STR_WITH_LEN("Compiled on " __DATE__),

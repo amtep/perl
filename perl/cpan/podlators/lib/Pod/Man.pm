@@ -919,7 +919,7 @@ $preamble
 .\\" ========================================================================
 .\\"
 .IX Title "$index"
-.TH $name $section "$date" "$$self{release}" "$$self{center}"
+.TH $name $section "$$self{release}" "$$self{center}"
 .\\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\\" way too many mistakes in technical documents.
 .if n .ad l

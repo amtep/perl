@@ -42,9 +42,6 @@ sed <<!GROK!THIS! >$CONFIG_H -e 's!^#undef\(.*/\)\*!/\*#define\1 \*!' -e 's!^#un
 
 /* Package name      : $package
  * Source directory  : $src
- * Configuration time: $cf_time
- * Configured by     : $cf_by
- * Target system     : $myuname
  */
 
 #ifndef _config_h_
