@@ -45,43 +45,6 @@ Source3:        macros.perl
 Source4:        perl.stp
 Source5:        perl-example.stp
 
-Patch0:         porting-podcheck-regen.patch
-# Removes date check, Fedora/RHEL specific
-Patch1:         perl-perlbug-tag.patch
-
-# Fedora/RHEL only (64bit only)
-Patch3:         perl-5.8.0-libdir64.patch
-
-# Fedora/RHEL specific (use libresolv instead of libbind)
-Patch4:         perl-5.10.0-libresolv.patch
-
-# FIXME: May need the "Fedora" references removed before upstreaming
-# patches ExtUtils-MakeMaker
-Patch5:         perl-USE_MM_LD_RUN_PATH.patch
-
-# Skip hostname tests, since hostname lookup isn't available in Fedora
-# buildroots by design.
-# patches Net::Config from libnet
-Patch6:         perl-disable_test_hosts.patch
-
-# The Fedora builders started randomly failing this futime test
-# only on x86_64, so we just don't run it. Works fine on normal
-# systems.
-Patch7:         perl-5.10.0-x86_64-io-test-failure.patch
-
-# switch off test, which is failing only on koji (fork)
-Patch8:         perl-5.14.1-offtest.patch
-
-# Fix find2perl to translate ? glob properly, rhbz#825701, RT#113054
-Patch9:         perl-5.14.2-find2perl-transtate-question-mark-properly.patch
-
-# Fix broken atof, rhbz#835452, RT#109318
-Patch10:        perl-5.16.0-fix-broken-atof.patch
-
-Patch11:        perl-5.12.1-notimestamps.patch
-
-Patch12:        perl-5.12.1-norebuilds.patch
-
 #
 # Update some of the bundled modules
 # see http://fedoraproject.org/wiki/Perl/perl.spec for instructions
@@ -1135,21 +1098,7 @@ A metapackage which requires all of the perl bits and modules in the upstream
 tarball from perl.org.
 
 %prep
-%setup -q -n perl-%{perl_version}
-%patch0 -p1
-%patch1 -p1
-%ifarch %{multilib_64_archs}
-%patch3 -p1
-%endif
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
+%setup -q -n perl-%{perl_version}/perl
 
 #copy the example script
 cp -a %{SOURCE5} .
@@ -1340,34 +1289,6 @@ pushd $RPM_BUILD_ROOT%{_mandir}/man1/
     mv new-$i $i
   done
 popd
-
-# Local patch tracking
-pushd %{build_archlib}/CORE/
-%{new_perl} -x patchlevel.h \
-    'Fedora Patch1: Removes date check, Fedora/RHEL specific' \
-%ifarch %{multilib_64_archs} \
-    'Fedora Patch3: support for libdir64' \
-%endif \
-    'Fedora Patch4: use libresolv instead of libbind' \
-    'Fedora Patch5: USE_MM_LD_RUN_PATH' \
-    'Fedora Patch6: Skip hostname tests, due to builders not being network capable' \
-    'Fedora Patch7: Dont run one io test due to random builder failures' \
-    'Fedora Patch9: Fix find2perl to translate ? glob properly (RT#113054)' \
-    'Fedora Patch10: Fix broken atof (RT#109318)' \
-    %{nil}
-
-rm patchlevel.bak
-popd
-
-# Local patch tracking
-cd $RPM_BUILD_ROOT%{_libdir}/perl5/CORE/
-%{new_perl} -x patchlevel.h 'Fedora Patch1: Removes date check, Fedora/RHEL specific'
-%ifnarch sparc64
-%{new_perl} -x patchlevel.h 'Fedora Patch2: Work around annoying rpath issue'
-%endif
-%ifarch %{multilib_64_archs}
-%{new_perl} -x patchlevel.h 'Fedora Patch3: support for libdir64'
-%endif
 
 cd $ORIG
 rm -rf $RPM_BUILD_ROOT/*.0
