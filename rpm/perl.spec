@@ -111,6 +111,8 @@ Obsoletes: perl-File-Temp < 0.20
 
 Requires: perl-libs = %{perl_epoch}:%{perl_version}-%{release}
 
+Provides: perl = %{perl_epoch}:%{perl_version}-%{release}
+
 # We need this to break the dependency loop, and ensure that perl-libs 
 # gets installed before perl.
 Requires(post): perl-libs
