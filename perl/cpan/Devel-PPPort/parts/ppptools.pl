@@ -31,7 +31,7 @@ sub all_files_in_dir
   local *DIR;
 
   opendir DIR, $dir or die "cannot open directory $dir: $!\n";
-  my @files = grep { !-d && !/^\./ } readdir DIR;  # no dirs or hidden files
+  my @files = sort grep { !-d && !/^\./ } readdir DIR;  # no dirs or hidden files
   closedir DIR;
 
   return map { cat_file($dir, $_) } @files;
